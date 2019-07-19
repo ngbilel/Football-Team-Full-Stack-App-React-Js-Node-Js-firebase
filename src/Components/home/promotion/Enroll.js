@@ -100,8 +100,6 @@ class Enroll extends Component  {
                 }
             })
 
-            //this.resetFormSucceess();
-
         }else {
             this.setState({
                 formError: true
@@ -124,7 +122,7 @@ class Enroll extends Component  {
                                 formData={this.state.formData.email}
                                 change={(element)=> this.updateForm(element)}
                             />
-                                {this.state.formError  ? 
+                            { this.state.formError  ? 
                                 <div className="error_label"> Something is Wrong, Try again</div> 
                                 : null
                             }
