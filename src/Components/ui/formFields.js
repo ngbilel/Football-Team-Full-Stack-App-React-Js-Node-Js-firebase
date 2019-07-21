@@ -21,6 +21,14 @@ const renderTemplate = () =>{
         case ('input'):
             formTemplate=(
                 <div>
+                     {
+                         formData.showLabel ?
+                            <div className="label_inputs">
+                                {formData.config.label}
+                            </div>
+                         :
+                         null
+                     }
                      <input {...formData.config}
                             value= {formData.value}
                             onChange={(event)=>change({event,id})}
