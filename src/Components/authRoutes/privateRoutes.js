@@ -11,7 +11,7 @@ const PrivateRoutes = ({
             user ?
             <Comp {...props} user={user}/> //Comp is equal to Dashboard
             :
-            <Redirect to="/sing_in"/>
+            <Redirect to="/sign_in"/>
     )}/>
 };
 

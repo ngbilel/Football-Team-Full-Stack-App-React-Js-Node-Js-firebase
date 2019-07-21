@@ -8,7 +8,7 @@ import 'firebase/auth';
 
 
 
-class SingIn extends Component {
+class SignIn extends Component {
 
     state={
         formError:false,
@@ -132,4 +132,4 @@ class SingIn extends Component {
     }
 }
 
-export default SingIn
+export default SignIn
