@@ -239,6 +239,59 @@ class AddEditMatch extends Component {
         }
     }
 
+    successForm(message){
+        this.setState({
+            formSuccess: message
+        });
+
+        setTimeout(()=>{
+            this.setState ({
+                formSuccess:''
+            })
+        },2000)
+    }
+
+    submitForm(event){
+        event.preventDefault();
+   
+        let dataToSubmit ={};
+        let formIsValid= true;
+
+        for (let key in this.state.formData){
+            dataToSubmit[key]=this.state.formData[key].value;
+            formIsValid = this.state.formData[key].valid && formIsValid;
+        }
+
+        // Add thumbnails team
+
+        this.state.teams.forEach((team) =>{
+            if( team.shortName === dataToSubmit.away) {
+                dataToSubmit['awayThmb'] = team.thmb
+            }
+        })
+
+        if (formIsValid){
+            // Check Add or Edit Match
+            if(this.state.formType === 'Edit Match'){
+                firebaseDB.ref(`matches/${this.state.matchId}`)
+                .update(dataToSubmit).then(()=>{
+                    this.successForm('Updated Correctly')
+                }).catch((e)=>{
+                    this.setState({formError: true})
+                })
+            }
+            else{ //Add Match
+
+            }
+        }else {
+            this.setState({
+                formError: true
+            })
+        }
+
+    }
+
+
     render(){
         return (
             <AdminLayout>
