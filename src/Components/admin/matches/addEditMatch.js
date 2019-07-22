@@ -229,7 +229,8 @@ class AddEditMatch extends Component {
             })
         }
         if(!matchId){
-            ///Add Match
+            //Add Match
+            getTeams(false,'Add Match');
         } else{
             firebaseDB.ref(`matches/${matchId}`).once('value')
             .then((snapshot)=>{
@@ -281,6 +282,13 @@ class AddEditMatch extends Component {
                 })
             }
             else{ //Add Match
+                firebaseMatches.push(dataToSubmit).then(()=>{
+                    this.props.history.push('/admin_matches');
+                }).catch((e)=>{
+                    this.setState({
+                        formError: true
+                    })
+                })
 
             }
         }else {
@@ -306,12 +314,7 @@ class AddEditMatch extends Component {
                                 formData={this.state.formData.date}
                                 change={(element)=> this.updateForm(element)}
                             />
-                             <FormField
-                                id={'local'}
-                                formData={this.state.formData.local}
-                                change={(element)=> this.updateForm(element)}
-                            />
-
+                           
                             <div className="select_team_layout">
                                 <div className="label_inputs"> Local</div>
                                     <div className="wrapper">
