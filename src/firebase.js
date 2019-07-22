@@ -18,9 +18,12 @@ const firebaseConfig = {
   //Get Matches
   const firebaseMatches= firebaseDB.ref('matches');
   const firebasePromotions= firebaseDB.ref('promotions');
+  const firebaseTeams = firebaseDB.ref('teams')
 
  export {
      firebase,
      firebaseMatches,
-     firebasePromotions
+     firebasePromotions,
+     firebaseTeams,
+     firebaseDB
  }

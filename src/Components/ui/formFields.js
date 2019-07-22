@@ -51,7 +51,7 @@ const renderTemplate = () =>{
                      }
                     <select
                         value={formData.value} 
-                        onChange={(event)=>this.onChange(event)}
+                        onChange={(event)=>change({event,id})}
                     >
                         <option value="">Select One</option>
                         {
