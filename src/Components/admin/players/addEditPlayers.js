@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import AdminLayout from '../../../Hoc/AdminLayout';
 import FormField from '../../ui/formFields';
 import {validate} from '../../ui/misc';
-import {firebasePlayers, firebaseDB} from '../../../firebase';
+import {firebasePlayers, firebaseDB,firebase} from '../../../firebase';
 import FileUploader from '../../ui/fileUploader';
 
 
 class AddEditPlayers extends Component {
 
 state = {
-    player:'',
+    playerId:'',
     formType:'',
     formError:'',
     formSuccess:'',
@@ -89,6 +89,23 @@ state = {
     }
 }
 
+updateFields = (player , playerId , formType , defaultImg) => {
+
+    const newFormData = { ...this.state.formData}
+
+    for(let key in newFormData){
+        newFormData[key].value = player[key];
+        newFormData[key].valid =  true
+    }
+
+    this.setState({
+        playerId,
+        defaultImg,
+        formType,
+        formData :  newFormData
+    })
+}
+
 componentDidMount(){
 
     const playerId=this.props.match.params.id;
@@ -98,7 +115,20 @@ componentDidMount(){
             this.setState({ formType:'Add Player'})
 
     }else{  //Edit Player
+        firebaseDB.ref(`players/${playerId}`).once('value')
+        .then( snapshot =>{
+            const playerData=snapshot.val();
+            //find Image player
+            firebase.storage().ref('players')
+            .child(playerData.image).getDownloadURL()
+            .then(url => {
+                //Function to update fields
+                this.updateFields(playerData, playerId, 'Edit player', url) 
+            }).catch(e => {
+                this.updateFields({...playerData, image:''}, playerId, 'Edit player', '') 
+            })
 
+        })
     }
 }
 
@@ -131,6 +161,16 @@ updateForm = (element, content='') => { // content for fileUploader
 
 }
 
+successForm = (message) => {
+    this.setState({
+        formSuccess: message
+    });
+    setTimeout(()=>{
+        this.setState({
+            formSuccess: ''
+        });
+    },2000)
+}
 
 
 submitForm(event){
@@ -147,7 +187,15 @@ submitForm(event){
 
 
     if (formIsValid){ //Submit Form
+       
         if(this.state.formType === 'Edit player'){
+
+            firebaseDB.ref(`players/${this.state.playerId}`)
+            .update(dataToSubmit).then(()=>{
+                this.successForm('Update Correctly')
+            }).catch(e => 
+                this.setState({formError:true})
+            )
 
         }else{ //Add player
             firebasePlayers.push(dataToSubmit).then(()=>{
