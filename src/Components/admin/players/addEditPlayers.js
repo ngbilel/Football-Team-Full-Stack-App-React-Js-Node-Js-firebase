@@ -3,6 +3,8 @@ import AdminLayout from '../../../Hoc/AdminLayout';
 import FormField from '../../ui/formFields';
 import {validate} from '../../ui/misc';
 import {firebasePlayers, firebaseDB} from '../../../firebase';
+import FileUploader from '../../ui/fileUploader';
+
 
 class AddEditPlayers extends Component {
 
@@ -11,6 +13,7 @@ state = {
     formType:'',
     formError:'',
     formSuccess:'',
+    defaultImg:'',
     formData:{
         name: {
             element:'input',
@@ -74,6 +77,14 @@ state = {
             validationMessage:'',
             showLabel:true
         },
+        image:{
+            element:'image',
+            value:'',
+            validtion:{
+                required: true
+            },
+            valid:true
+        }
         
     }
 }
@@ -126,27 +137,9 @@ submitForm(event){
 
 
 
-    if (formIsValid){
+    if (formIsValid){ //Submit Form
 
 
-        /* Check Add or Edit Match
-        if(this.state.formType === 'Edit Match'){
-            firebaseDB.ref(`matches/${this.state.matchId}`)
-            .update(dataToSubmit).then(()=>{
-                this.successForm('Updated Correctly')
-            }).catch((e)=>{
-                this.setState({formError: true})
-            })
-        }
-        else{ //Add Match
-            firebaseMatches.push(dataToSubmit).then(()=>{
-                this.props.history.push('/admin_matches');
-            }).catch((e)=>{
-                this.setState({
-                    formError: true
-                })
-            })
-        }*/
 
     }else {
         this.setState({
@@ -157,6 +150,14 @@ submitForm(event){
 }
 
 
+resetImage(){
+
+}
+
+storeFilename(){
+
+}
+
     render (){
         return (
             <AdminLayout>
@@ -166,10 +167,23 @@ submitForm(event){
                     </h2>
                     <div>
                         <form onSubmit={(event)=>this.submitForm(event)}>
+
+                            <FileUploader
+                                dir="players"
+                                tag={"Player image"}
+                                defaultImg={this.state.defaultImg}
+                                defaultImgName={this.state.formData.image.value}
+                                resetImage={()=>this.resetImage()}
+                                filename={(filename)=>this.storeFilename(filename)}
+
+                            />
+
                             <FormField
                                 id={'name'}
                                 formData={this.state.formData.name}
                                 change={(element)=> this.updateForm(element)}
+                                //remove Player Image
+                                restImage={()=>this.restImage()}
                             />
 
                             <FormField

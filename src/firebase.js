@@ -7,7 +7,7 @@ const firebaseConfig = {
     authDomain: "football-team-4afb6.firebaseapp.com",
     databaseURL: "https://football-team-4afb6.firebaseio.com",
     projectId: "football-team-4afb6",
-    storageBucket: "",
+    storageBucket: "gs://football-team-4afb6.appspot.com/",
     messagingSenderId: "147972687755",
     appId: "1:147972687755:web:326dd13db40ec5f4"
   };
