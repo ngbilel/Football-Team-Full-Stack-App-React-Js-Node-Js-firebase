@@ -80,10 +80,10 @@ state = {
         image:{
             element:'image',
             value:'',
-            validtion:{
+            validation:{
                 required: true
             },
-            valid:true
+            valid:false
         }
         
     }
@@ -102,11 +102,20 @@ componentDidMount(){
     }
 }
 
-updateForm(element){
+updateForm = (element, content='') => { // content for fileUploader
+
+    console.log(element);
+
     const newFormData= { ...this.state.formData} 
     const newElement = {...newFormData[element.id]}
 
-    newElement.value = element.event.target.value;
+    if(content ===''){
+        newElement.value = element.event.target.value;
+        
+    } else {
+        newElement.value = content; // Name of the image
+    }
+
      
     //Validation
      let validData = validate(newElement);
@@ -138,8 +147,15 @@ submitForm(event){
 
 
     if (formIsValid){ //Submit Form
+        if(this.state.formType === 'Edit player'){
 
-
+        }else{ //Add player
+            firebasePlayers.push(dataToSubmit).then(()=>{
+                this.props.history.push('/admin_players')
+            }).catch( e => {
+                this.setState({formError : true})
+            })
+        }
 
     }else {
         this.setState({
@@ -150,15 +166,25 @@ submitForm(event){
 }
 
 
-resetImage(){
+resetImage = () => {
 
+    const newFormData = {...this.state.formData};
+    newFormData['image'].value = '';
+    newFormData['image'].valid = false;
+    this.setState({
+        defaultImg:'',
+        formData:newFormData
+    })
 }
 
-storeFilename(){
-
+storeFilename = (filename) => { //update the form
+    this.updateForm({id:'image'}, filename)
 }
 
     render (){
+
+        console.log(this.state.formData);
+
         return (
             <AdminLayout>
                 <div className="editplayers_dialog_wrapper">
@@ -175,7 +201,6 @@ storeFilename(){
                                 defaultImgName={this.state.formData.image.value}
                                 resetImage={()=>this.resetImage()}
                                 filename={(filename)=>this.storeFilename(filename)}
-
                             />
 
                             <FormField

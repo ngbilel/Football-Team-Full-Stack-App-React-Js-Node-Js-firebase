@@ -42,11 +42,19 @@ class Fileuploader extends Component {
         firebase.storage().ref(this.props.dir)
         .child(filename).getDownloadURL()
         .then( url =>{
-            
-            console.log( url)
-
             this.setState({  fileURL: url })
         })
+
+        this.props.filename(filename)
+    }
+
+    uploadAgain = () => {
+        this.setState({
+            name:'',
+            isUploading:false,
+            fileURL:''
+        });
+        this.props.resetImage();
     }
 
     render(){
