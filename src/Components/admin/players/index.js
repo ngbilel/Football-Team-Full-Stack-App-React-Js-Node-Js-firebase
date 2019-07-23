@@ -15,7 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {firebaseMatches, firebasePlayers} from '../../../firebase';
 import {firebaseLooper, reverseArray} from '../../ui/misc'
-import { cpus } from 'os';
+
 
 class AdminPlayers extends Component {
 
