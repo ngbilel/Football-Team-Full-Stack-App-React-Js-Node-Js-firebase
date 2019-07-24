@@ -55,7 +55,7 @@ class HomeCards extends Component {
                         <PlayerCard
                             number="30"
                             name="Nicolas"
-                            lastname="Otamendi"
+                            lastName="Otamendi"
                             bck={Otamendi}
                         />
                         </div>
