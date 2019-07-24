@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import {firebaseMatches, firebasePlayers} from '../../../firebase';
+import {firebasePlayers} from '../../../firebase';
 import {firebaseLooper, reverseArray} from '../../ui/misc'
 
 
@@ -35,8 +35,6 @@ class AdminPlayers extends Component {
     }
 
     render(){
-
-        console.log(this.state);
 
         return (
             <AdminLayout>

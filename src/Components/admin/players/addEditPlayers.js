@@ -134,7 +134,6 @@ componentDidMount(){
 
 updateForm = (element, content='') => { // content for fileUploader
 
-    console.log(element);
 
     const newFormData= { ...this.state.formData} 
     const newElement = {...newFormData[element.id]}
@@ -231,7 +230,6 @@ storeFilename = (filename) => { //update the form
 
     render (){
 
-        console.log(this.state.formData);
 
         return (
             <AdminLayout>

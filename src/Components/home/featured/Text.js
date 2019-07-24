@@ -32,7 +32,7 @@ class Text extends Component {
                                  transform:`translate(${x}px,${y}px)`
                              }}
                         >
-                           League
+                           The League
                         </div>
                     )
                 }}

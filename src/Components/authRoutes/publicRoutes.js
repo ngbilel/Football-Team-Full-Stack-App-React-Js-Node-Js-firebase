@@ -7,8 +7,7 @@ const PublicRoutes = ({
     ...rest
 }) =>{
 
-    console.log(rest.restricted);
-    console.log(user);
+   
 
     return <Route {...rest} component={(props)=>(
        rest.restricted ? (

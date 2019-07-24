@@ -108,7 +108,7 @@ class SignIn extends Component {
             <div className="container">
                     <div className="signin_wrapper" style={{margin:'100px'}}>
                         <form onSubmit={(event=>this.submitForm(event))}>
-                            <h2>Log In</h2>
+                            <h2>Sign In</h2>
                             <FormField
                                 id={'email'}
                                 formData={this.state.formData.email}
@@ -123,7 +123,7 @@ class SignIn extends Component {
                                 <div className="error_label"> Something is Wrong, Try again</div> 
                                 : null
                             }
-                            <button onClick={(event) => this.submitForm(event)} >Connexion</button>
+                            <button onClick={(event) => this.submitForm(event)} >Login</button>
 
                         </form>
                     </div>  

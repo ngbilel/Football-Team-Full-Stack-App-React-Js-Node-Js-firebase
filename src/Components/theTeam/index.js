@@ -68,7 +68,6 @@ class TheTeam extends Component {
     )
 
     render(){
-        console.log(this.state.players)
         return(
             <div className="the_team_container" style={{
                 background:`url(${Stripes}) repeat`
