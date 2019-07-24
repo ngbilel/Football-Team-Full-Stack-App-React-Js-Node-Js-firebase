@@ -305,10 +305,12 @@ footer .footer_discl {
     clear: both;
 }
 
-.match_box_big .block_wraper {
+.match_box_big .block_wrapper {
+    float: left;
     display: inline-block;
     margin-right: 50px;
-    float: left;
+    width:250px;
+
 }
 
 .match_box_big .block {
@@ -333,15 +335,16 @@ footer .footer_discl {
     font-weight: 500;
 }
 
-.block_wraper.nfo {
+.block_wrapper.info {
     border-left: 1px solid #98c6e9;
     height: 102px;
     padding-left: 10px;
+    padding-top:10px;
     font-weight: 300;
     color: #5e5e5e;
 }
 
-.block_wraper.nfo div {
+.block_wrapper.info div {
     margin: 5px 0px;
 }
 
